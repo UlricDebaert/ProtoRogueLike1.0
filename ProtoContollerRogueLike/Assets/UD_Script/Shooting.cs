@@ -7,6 +7,8 @@ public class Shooting : MonoBehaviour
     public Transform firePoint1;
     public Transform firePoint2;
     public Transform firePoint3;
+    public Transform firePoint4;
+    public Transform firePoint5;
     public GameObject gatlingBulletPrefab;
     public GameObject shootgunBulletPrefab;
 
@@ -78,6 +80,14 @@ public class Shooting : MonoBehaviour
         GameObject bullet3 = Instantiate(shootgunBulletPrefab, firePoint3.position, firePoint3.rotation);
         Rigidbody2D rb3 = bullet3.GetComponent<Rigidbody2D>();
         rb3.AddForce(firePoint3.up * bulletForce, ForceMode2D.Impulse);
+
+        GameObject bullet4 = Instantiate(shootgunBulletPrefab, firePoint4.position, firePoint4.rotation);
+        Rigidbody2D rb4 = bullet4.GetComponent<Rigidbody2D>();
+        rb4.AddForce(firePoint4.up * bulletForce, ForceMode2D.Impulse);
+
+        GameObject bullet5 = Instantiate(shootgunBulletPrefab, firePoint5.position, firePoint5.rotation);
+        Rigidbody2D rb5 = bullet5.GetComponent<Rigidbody2D>();
+        rb5.AddForce(firePoint5.up * bulletForce, ForceMode2D.Impulse);
     }
 
     void ChangeWeapon()
