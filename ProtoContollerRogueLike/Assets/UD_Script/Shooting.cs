@@ -17,6 +17,8 @@ public class Shooting : MonoBehaviour
     public float gatlingFireRate = 0.1f;
     public float shootgunFireRate = 0.1f;
     float fireRateTimer;
+    public float gatlingImprecision;
+    public float shootgunImprecision;
 
     private bool canShoot;
     private bool gatlingEquiped;
@@ -62,32 +64,32 @@ public class Shooting : MonoBehaviour
 
     void GatlingShoot()
     {
-        GameObject bullet = Instantiate(gatlingBulletPrefab, firePoint1.position, firePoint1.rotation);
+        GameObject bullet = Instantiate(gatlingBulletPrefab, firePoint1.position, firePoint1.rotation * Quaternion.Euler(0.0f, 0.0f, Random.Range(-gatlingImprecision, gatlingImprecision)));
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(firePoint1.up * bulletForce, ForceMode2D.Impulse);
+        rb.AddForce(bullet.transform.up * bulletForce, ForceMode2D.Impulse);
     }
 
     void ShootgunShoot()
     {
-        GameObject bullet1 = Instantiate(shootgunBulletPrefab, firePoint1.position, firePoint1.rotation);
+        GameObject bullet1 = Instantiate(shootgunBulletPrefab, firePoint1.position, firePoint1.rotation * Quaternion.Euler(0.0f, 0.0f, Random.Range(-shootgunImprecision, shootgunImprecision)));
         Rigidbody2D rb = bullet1.GetComponent<Rigidbody2D>();
-        rb.AddForce(firePoint1.up * bulletForce, ForceMode2D.Impulse);
+        rb.AddForce(bullet1.transform.up * bulletForce, ForceMode2D.Impulse);
 
-        GameObject bullet2 = Instantiate(shootgunBulletPrefab, firePoint2.position, firePoint2.rotation);
+        GameObject bullet2 = Instantiate(shootgunBulletPrefab, firePoint2.position, firePoint2.rotation * Quaternion.Euler(0.0f, 0.0f, Random.Range(-shootgunImprecision, shootgunImprecision)));
         Rigidbody2D rb2 = bullet2.GetComponent<Rigidbody2D>();
-        rb2.AddForce(firePoint2.up * bulletForce, ForceMode2D.Impulse);
+        rb2.AddForce(bullet2.transform.up * bulletForce, ForceMode2D.Impulse);
 
-        GameObject bullet3 = Instantiate(shootgunBulletPrefab, firePoint3.position, firePoint3.rotation);
+        GameObject bullet3 = Instantiate(shootgunBulletPrefab, firePoint3.position, firePoint3.rotation * Quaternion.Euler(0.0f, 0.0f, Random.Range(-shootgunImprecision, shootgunImprecision)));
         Rigidbody2D rb3 = bullet3.GetComponent<Rigidbody2D>();
-        rb3.AddForce(firePoint3.up * bulletForce, ForceMode2D.Impulse);
+        rb3.AddForce(bullet3.transform.up * bulletForce, ForceMode2D.Impulse);
 
-        GameObject bullet4 = Instantiate(shootgunBulletPrefab, firePoint4.position, firePoint4.rotation);
+        GameObject bullet4 = Instantiate(shootgunBulletPrefab, firePoint4.position, firePoint4.rotation * Quaternion.Euler(0.0f, 0.0f, Random.Range(-shootgunImprecision, shootgunImprecision)));
         Rigidbody2D rb4 = bullet4.GetComponent<Rigidbody2D>();
-        rb4.AddForce(firePoint4.up * bulletForce, ForceMode2D.Impulse);
+        rb4.AddForce(bullet4.transform.up * bulletForce, ForceMode2D.Impulse);
 
-        GameObject bullet5 = Instantiate(shootgunBulletPrefab, firePoint5.position, firePoint5.rotation);
+        GameObject bullet5 = Instantiate(shootgunBulletPrefab, firePoint5.position, firePoint5.rotation * Quaternion.Euler(0.0f, 0.0f, Random.Range(-shootgunImprecision, shootgunImprecision)));
         Rigidbody2D rb5 = bullet5.GetComponent<Rigidbody2D>();
-        rb5.AddForce(firePoint5.up * bulletForce, ForceMode2D.Impulse);
+        rb5.AddForce(bullet5.transform.up * bulletForce, ForceMode2D.Impulse);
     }
 
     void ChangeWeapon()
