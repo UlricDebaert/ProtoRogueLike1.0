@@ -9,6 +9,7 @@ public class Shooting : MonoBehaviour
     public Transform firePoint3;
     public Transform firePoint4;
     public Transform firePoint5;
+    public Transform swordHitBoxPos;
     public GameObject gatlingBulletPrefab;
     public GameObject shootgunBulletPrefab;
 
@@ -16,21 +17,29 @@ public class Shooting : MonoBehaviour
     public float shootgunBulletForce = 15.0f;
     public float gatlingFireRate = 0.1f;
     public float shootgunFireRate = 0.1f;
+    public float swordFireRate = 0.1f;
+    public float pistolFireRate = 0.1f;
     float fireRateTimer;
+    float pistolFireRateTimer;
     public float gatlingImprecision;
     public float shootgunImprecision;
+    public float swordAttackRadius;
 
     private bool canShoot;
+    private bool pistolCanShoot;
     private bool gatlingEquiped;
     private bool shootgunEquiped;
+    private bool swordEquiped;
 
     private bool gatlingOnFire;
     private bool shootgunOnFire;
+    private bool swordOnFire;
 
     private void Start()
     {
         gatlingEquiped = true;
         shootgunEquiped = false;
+        swordEquiped = false;
     }
 
     void Update()
@@ -48,6 +57,19 @@ public class Shooting : MonoBehaviour
             canShoot = false;
             fireRateTimer = shootgunFireRate;
         }
+        
+        if (Input.GetButton("Fire1") && canShoot && swordEquiped)
+        {
+            SwordShoot();
+            canShoot = false;
+            fireRateTimer = swordFireRate;
+        }
+        if (Input.GetButton("Fire2") && canShoot && swordEquiped)
+        {
+            SwordShoot();
+            pistolCanShoot = false;
+            pistolFireRateTimer = pistolFireRate;
+        }
 
         if (!canShoot)
         {
@@ -55,6 +77,15 @@ public class Shooting : MonoBehaviour
             if (fireRateTimer < 0.0f)
             {
                 canShoot = true;
+            }
+        }
+        
+        if (!pistolCanShoot)
+        {
+            fireRateTimer -= Time.deltaTime;
+            if (fireRateTimer < 0.0f)
+            {
+                pistolCanShoot = true;
             }
         }
 
@@ -92,6 +123,11 @@ public class Shooting : MonoBehaviour
         rb5.AddForce(bullet5.transform.up * bulletForce, ForceMode2D.Impulse);
     }
 
+    void SwordShoot()
+    {
+
+    }
+
     void ChangeWeapon()
     {
         if (Input.GetKeyDown(KeyCode.Q) && gatlingOnFire == true)
@@ -101,6 +137,11 @@ public class Shooting : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q) && shootgunOnFire == true)
         {
+            ChangeToSword();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Q) && swordOnFire == true)
+        {
             ChangeToGatling();
         }
 
@@ -108,12 +149,21 @@ public class Shooting : MonoBehaviour
         {
             gatlingOnFire = true;
             shootgunOnFire = false;
+            swordOnFire = false;
         }
 
         if (shootgunEquiped)
         {
             gatlingOnFire = false;
             shootgunOnFire = true;
+            swordOnFire = false;
+        }
+
+        if (swordEquiped)
+        {
+            gatlingOnFire = false;
+            shootgunOnFire = false;
+            swordOnFire = true;
         }
     }
 
@@ -121,12 +171,21 @@ public class Shooting : MonoBehaviour
     {
         gatlingEquiped = true;
         shootgunEquiped = false;
+        swordEquiped = false;
     }
 
     void ChangeToShootgun()
     {
         gatlingEquiped = false;
         shootgunEquiped = true;
+        swordEquiped = false;
+    }
+    
+    void ChangeToSword()
+    {
+        gatlingEquiped = false;
+        shootgunEquiped = false;
+        swordEquiped = true;
     }
 }
 
