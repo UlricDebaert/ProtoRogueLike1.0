@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
+    [SerializeField]
+    private SwordAttack SA;
+
     public Transform firePoint1;
     public Transform firePoint2;
     public Transform firePoint3;
@@ -125,7 +128,10 @@ public class Shooting : MonoBehaviour
 
     void SwordShoot()
     {
-
+        if(SA != null)
+        {
+            SA.GetAttackInput();
+        }
     }
 
     void ChangeWeapon()
