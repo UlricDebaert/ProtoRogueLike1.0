@@ -112,7 +112,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9036960700221565208}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -143,4 +143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb537e09480c1e4f93d8712ced33047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whatIsSolid:
+    serializedVersion: 2
+    m_Bits: 7168
   bulletLifeTime: 2
+  distance: 0.4
+  damage: 2

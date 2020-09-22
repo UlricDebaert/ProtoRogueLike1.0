@@ -64,6 +64,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\UD_Script\Bullet.cs" />
+    <Compile Include="Assets\UD_Script\EnnemisScript.cs" />
+    <Compile Include="Assets\UD_Script\PlayerHealth.cs" />
     <Compile Include="Assets\UD_Script\PlayerMouvement.cs" />
     <Compile Include="Assets\UD_Script\ShootgunBullet.cs" />
     <Compile Include="Assets\UD_Script\Shooting.cs" />
