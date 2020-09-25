@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SwordAttack : MonoBehaviour
 {
+    public LayerMask whatIsEnnemy;
+
     [SerializeField]
     private bool combatEnabled;
     [SerializeField]
@@ -13,8 +15,13 @@ public class SwordAttack : MonoBehaviour
     [SerializeField]
     private float attackRadius;
 
+    public int damage;
+
     private bool gotInput;
     public bool isAttacking;
+
+    [SerializeField]
+    private Shooting Sh;
 
     //private Animator anim;
 
@@ -50,13 +57,34 @@ public class SwordAttack : MonoBehaviour
         }
     }
 
-    private void CheckAttackHitBox()
+    public void CheckAttackHitBox()
     {
-        Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attackHitBoxPos.position, attackRadius, whatIsKillable);
+        /*Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attackHitBoxPos.position, attackRadius, whatIsKillable);
 
         foreach (Collider2D collider2D in detectedObjects)
         {
-            collider2D.transform.parent.SendMessage("Die");
+            collider2D.transform.parent.SendMessage("Hit");
+        }*/
+        Collider2D hitInfo = Physics2D.OverlapCircle(attackHitBoxPos.position, attackRadius, whatIsEnnemy);
+        if (hitInfo != null)
+        {
+
+            Rigidbody2D enemy = hitInfo.GetComponent<Rigidbody2D>();
+            if (hitInfo.CompareTag("Ennemi"))
+            {
+                Debug.Log("DAMAGE");
+                hitInfo.GetComponent<EnnemisScript>().TakeDamage(damage);
+                /*enemy.isKinematic = false;
+                Vector2 difference = enemy.transform.position - transform.position;
+                difference = difference.normalized * poussée;
+                enemy.AddForce(difference, ForceMode2D.Impulse);
+                StartCoroutine(KnockCo(enemy));*/
+            }
+
+            if (hitInfo.CompareTag("Environement"))
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

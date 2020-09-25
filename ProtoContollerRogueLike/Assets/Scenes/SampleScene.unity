@@ -1109,29 +1109,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b32681b40aa14545b698377637278a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SA: {fileID: 0}
+  SA: {fileID: 1752818717}
   firePoint1: {fileID: 708499451}
   firePoint2: {fileID: 804952952}
   firePoint3: {fileID: 941164917}
   firePoint4: {fileID: 1206519472}
   firePoint5: {fileID: 1942452879}
-  swordHitBoxPos: {fileID: 0}
+  swordHitBoxPos: {fileID: 1090896521}
   gatlingBulletPrefab: {fileID: 9036960700221565208, guid: 6db1b8aa9612750478c8cb59c2eb2315,
     type: 3}
   shootgunBulletPrefab: {fileID: 3415272654159278721, guid: 377a9415886b62142b84c8c05ded2c45,
     type: 3}
-  player: {fileID: 0}
+  pistolBulletPrefab: {fileID: 3888116018726082938, guid: 33bb1366f0daca54480d75a0161e39ff,
+    type: 3}
   bulletForce: 20
   shootgunBulletForce: 10
   gatlingFireRate: 0.1
   shootgunFireRate: 0.5
   swordFireRate: 0.1
-  pistolFireRate: 0.1
+  pistolFireRate: 1
   gatlingImprecision: 5
   shootgunImprecision: 10
-  swordAttackRadius: 0
-  knockTime: 0.1
-  "pouss\xE9e": 1
+  pistolImprecision: 3
+  swordAttackRadius: 0.4
 --- !u!114 &1752818717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1144,13 +1144,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c6a57875fe7004b8da6a5f29c4e52a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whatIsEnnemy:
+    serializedVersion: 2
+    m_Bits: 2048
   combatEnabled: 0
   attackHitBoxPos: {fileID: 1090896521}
   whatIsKillable:
     serializedVersion: 2
     m_Bits: 2048
   attackRadius: 0.4
+  damage: 10
   isAttacking: 0
+  Sh: {fileID: 1752818716}
 --- !u!114 &1752818718
 MonoBehaviour:
   m_ObjectHideFlags: 0

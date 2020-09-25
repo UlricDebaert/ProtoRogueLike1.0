@@ -15,6 +15,7 @@ public class Shooting : MonoBehaviour
     public Transform swordHitBoxPos;
     public GameObject gatlingBulletPrefab;
     public GameObject shootgunBulletPrefab;
+    public GameObject pistolBulletPrefab;
 
     public float bulletForce = 20.0f;
     public float shootgunBulletForce = 15.0f;
@@ -26,6 +27,7 @@ public class Shooting : MonoBehaviour
     float pistolFireRateTimer;
     public float gatlingImprecision;
     public float shootgunImprecision;
+    public float pistolImprecision;
     public float swordAttackRadius;
 
     private bool canShoot;
@@ -67,9 +69,9 @@ public class Shooting : MonoBehaviour
             canShoot = false;
             fireRateTimer = swordFireRate;
         }
-        if (Input.GetButton("Fire2") && canShoot && swordEquiped)
+        if (Input.GetButton("Fire2") && pistolCanShoot && swordEquiped)
         {
-            SwordShoot();
+            PistolShoot();
             pistolCanShoot = false;
             pistolFireRateTimer = pistolFireRate;
         }
@@ -85,8 +87,8 @@ public class Shooting : MonoBehaviour
         
         if (!pistolCanShoot)
         {
-            fireRateTimer -= Time.deltaTime;
-            if (fireRateTimer < 0.0f)
+            pistolFireRateTimer -= Time.deltaTime;
+            if (pistolFireRateTimer < 0.0f)
             {
                 pistolCanShoot = true;
             }
@@ -126,11 +128,18 @@ public class Shooting : MonoBehaviour
         rb5.AddForce(bullet5.transform.up * bulletForce, ForceMode2D.Impulse);
     }
 
+    void PistolShoot()
+    {
+        GameObject bullet = Instantiate(pistolBulletPrefab, firePoint1.position, firePoint1.rotation * Quaternion.Euler(0.0f, 0.0f, Random.Range(-pistolImprecision, pistolImprecision)));
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.AddForce(bullet.transform.up * bulletForce, ForceMode2D.Impulse);
+    }
+
     void SwordShoot()
     {
         if(SA != null)
         {
-            SA.GetAttackInput();
+            SA.CheckAttackHitBox();
         }
     }
 
