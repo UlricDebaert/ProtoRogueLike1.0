@@ -29,6 +29,10 @@ public class Shooting : MonoBehaviour
     public float shootgunImprecision;
     public float pistolImprecision;
     public float swordAttackRadius;
+    public float gatlingMaxAmmo;
+    public float gatlingCurrentAmmo;
+    public float shootgunMaxAmmo;
+    public float shootgunCurrentAmmo;
 
     private bool canShoot;
     private bool pistolCanShoot;
@@ -45,18 +49,20 @@ public class Shooting : MonoBehaviour
         gatlingEquiped = true;
         shootgunEquiped = false;
         swordEquiped = false;
+        gatlingCurrentAmmo = gatlingMaxAmmo;
+        shootgunCurrentAmmo = shootgunMaxAmmo;
     }
 
     void Update()
     {
-        if (Input.GetButton("Fire1") && canShoot && gatlingEquiped)
+        if (Input.GetButton("Fire1") && canShoot && gatlingEquiped && gatlingCurrentAmmo>0.0f)
         {
             GatlingShoot();
             canShoot = false;
             fireRateTimer = gatlingFireRate;
         }
 
-        if (Input.GetButton("Fire1") && canShoot && shootgunEquiped)
+        if (Input.GetButton("Fire1") && canShoot && shootgunEquiped && shootgunCurrentAmmo>0.0f)
         {
             ShootgunShoot();
             canShoot = false;
@@ -103,6 +109,7 @@ public class Shooting : MonoBehaviour
         GameObject bullet = Instantiate(gatlingBulletPrefab, firePoint1.position, firePoint1.rotation * Quaternion.Euler(0.0f, 0.0f, Random.Range(-gatlingImprecision, gatlingImprecision)));
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(bullet.transform.up * bulletForce, ForceMode2D.Impulse);
+        gatlingCurrentAmmo--;
     }
 
     void ShootgunShoot()
@@ -126,6 +133,7 @@ public class Shooting : MonoBehaviour
         GameObject bullet5 = Instantiate(shootgunBulletPrefab, firePoint5.position, firePoint5.rotation * Quaternion.Euler(0.0f, 0.0f, Random.Range(-shootgunImprecision, shootgunImprecision)));
         Rigidbody2D rb5 = bullet5.GetComponent<Rigidbody2D>();
         rb5.AddForce(bullet5.transform.up * bulletForce, ForceMode2D.Impulse);
+        shootgunCurrentAmmo--;
     }
 
     void PistolShoot()
@@ -140,6 +148,7 @@ public class Shooting : MonoBehaviour
         if(SA != null)
         {
             SA.CheckAttackHitBox();
+            //A changer quand on aura les anims
         }
     }
 

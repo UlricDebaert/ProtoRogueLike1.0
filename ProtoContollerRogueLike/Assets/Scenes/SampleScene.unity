@@ -1132,6 +1132,10 @@ MonoBehaviour:
   shootgunImprecision: 10
   pistolImprecision: 3
   swordAttackRadius: 0.4
+  gatlingMaxAmmo: 50
+  gatlingCurrentAmmo: 0
+  shootgunMaxAmmo: 20
+  shootgunCurrentAmmo: 0
 --- !u!114 &1752818717
 MonoBehaviour:
   m_ObjectHideFlags: 0
