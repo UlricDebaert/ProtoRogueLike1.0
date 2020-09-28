@@ -23,6 +23,9 @@ public class Shooting : MonoBehaviour
     public float shootgunFireRate = 0.1f;
     public float swordFireRate = 0.1f;
     public float pistolFireRate = 0.1f;
+    public float currentGatlingFireRate;
+    public float currentShootgunFireRate;
+    public float currentPistolFireRate;
     float fireRateTimer;
     float pistolFireRateTimer;
     float swordFireRateTimer;
@@ -53,6 +56,10 @@ public class Shooting : MonoBehaviour
         pistolEquiped = false;
         gatlingCurrentAmmo = gatlingMaxAmmo;
         shootgunCurrentAmmo = shootgunMaxAmmo;
+
+        currentGatlingFireRate = gatlingFireRate;
+        currentPistolFireRate = pistolFireRate;
+        currentShootgunFireRate = shootgunFireRate;
     }
 
     void Update()
@@ -68,21 +75,21 @@ public class Shooting : MonoBehaviour
         {
             GatlingShoot();
             canShoot = false;
-            fireRateTimer = gatlingFireRate;
+            fireRateTimer = currentGatlingFireRate;
         }
 
         if (Input.GetButton("Fire1") && canShoot && shootgunEquiped && shootgunCurrentAmmo>0.0f)
         {
             ShootgunShoot();
             canShoot = false;
-            fireRateTimer = shootgunFireRate;
+            fireRateTimer = currentShootgunFireRate;
         }
         
         if (Input.GetButton("Fire1") && pistolCanShoot && pistolEquiped)
         {
             PistolShoot();
             pistolCanShoot = false;
-            pistolFireRateTimer = pistolFireRate;
+            pistolFireRateTimer = currentPistolFireRate;
         }
 
         if (!canShoot)
@@ -159,7 +166,8 @@ public class Shooting : MonoBehaviour
     {
         if(SA != null)
         {
-            SA.CheckAttackHitBox();
+            SA.gotInput = true;
+            //SA.CheckAttackHitBox();
             //A changer quand on aura les anims
         }
     }
@@ -222,6 +230,13 @@ public class Shooting : MonoBehaviour
         gatlingEquiped = false;
         shootgunEquiped = false;
         pistolEquiped = true;
+    }
+
+    public void UpgradeRateOfFire(float fireRateMultiplier)
+    {
+        currentPistolFireRate = currentPistolFireRate * fireRateMultiplier;
+        currentGatlingFireRate = currentGatlingFireRate * fireRateMultiplier;
+        currentShootgunFireRate = currentShootgunFireRate * fireRateMultiplier;
     }
 }
 

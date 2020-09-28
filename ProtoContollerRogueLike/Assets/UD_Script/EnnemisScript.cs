@@ -29,7 +29,6 @@ public class EnnemisScript : MonoBehaviour
     {
         health -= damage;
         takeDamage = true;
-        Debug.Log("test");
     }
 
     void UpdateAnim()

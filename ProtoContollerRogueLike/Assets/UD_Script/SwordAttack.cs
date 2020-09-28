@@ -17,19 +17,19 @@ public class SwordAttack : MonoBehaviour
 
     public int damage;
 
-    private bool gotInput;
+    public bool gotInput;
     public bool isAttacking;
 
     [SerializeField]
     private Shooting Sh;
 
-    //private Animator anim;
+    [SerializeField] private Animator anim;
 
-    /*private void Start()
+    private void Start()
     {
         anim = GetComponent<Animator>();
         anim.SetBool("canAttack", combatEnabled);
-    }*/
+    }
 
     private void Update()
     {
@@ -52,7 +52,7 @@ public class SwordAttack : MonoBehaviour
             {
                 gotInput = false;
                 isAttacking = true;
-                //anim.SetBool("isAttacking", isAttacking);
+                anim.SetBool("isAttacking", isAttacking);
             }
         }
     }
@@ -80,7 +80,7 @@ public class SwordAttack : MonoBehaviour
     private void FinishAttack()
     {
         isAttacking = false;
-        //anim.SetBool("isAttacking", isAttacking);
+        anim.SetBool("isAttacking", isAttacking);
     }
 
     private void OnDrawGizmos()
