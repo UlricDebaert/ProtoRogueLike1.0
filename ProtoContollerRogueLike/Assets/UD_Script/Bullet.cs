@@ -43,7 +43,6 @@ public class Bullet : MonoBehaviour
             Rigidbody2D enemy = hitInfo.collider.GetComponent<Rigidbody2D>();
             if (hitInfo.collider.CompareTag("Ennemi"))
             {
-                Debug.Log("DAMAGE");
                 hitInfo.collider.GetComponent<EnnemisScript>().TakeDamage(damage);
                 /*enemy.isKinematic = false;
                 Vector2 difference = enemy.transform.position - transform.position;

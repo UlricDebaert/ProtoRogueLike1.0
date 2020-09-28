@@ -25,6 +25,7 @@ public class Shooting : MonoBehaviour
     public float pistolFireRate = 0.1f;
     float fireRateTimer;
     float pistolFireRateTimer;
+    float swordFireRateTimer;
     public float gatlingImprecision;
     public float shootgunImprecision;
     public float pistolImprecision;
@@ -35,10 +36,11 @@ public class Shooting : MonoBehaviour
     public float shootgunCurrentAmmo;
 
     private bool canShoot;
+    private bool canSwordShoot;
     private bool pistolCanShoot;
     private bool gatlingEquiped;
     private bool shootgunEquiped;
-    private bool swordEquiped;
+    private bool pistolEquiped;
 
     private bool gatlingOnFire;
     private bool shootgunOnFire;
@@ -48,13 +50,20 @@ public class Shooting : MonoBehaviour
     {
         gatlingEquiped = true;
         shootgunEquiped = false;
-        swordEquiped = false;
+        pistolEquiped = false;
         gatlingCurrentAmmo = gatlingMaxAmmo;
         shootgunCurrentAmmo = shootgunMaxAmmo;
     }
 
     void Update()
     {
+        if (Input.GetButton("Fire2") && canSwordShoot)
+        {
+            SwordShoot();
+            canSwordShoot = false;
+            swordFireRateTimer = swordFireRate;
+        }
+
         if (Input.GetButton("Fire1") && canShoot && gatlingEquiped && gatlingCurrentAmmo>0.0f)
         {
             GatlingShoot();
@@ -69,13 +78,7 @@ public class Shooting : MonoBehaviour
             fireRateTimer = shootgunFireRate;
         }
         
-        if (Input.GetButton("Fire1") && canShoot && swordEquiped)
-        {
-            SwordShoot();
-            canShoot = false;
-            fireRateTimer = swordFireRate;
-        }
-        if (Input.GetButton("Fire2") && pistolCanShoot && swordEquiped)
+        if (Input.GetButton("Fire1") && pistolCanShoot && pistolEquiped)
         {
             PistolShoot();
             pistolCanShoot = false;
@@ -88,6 +91,15 @@ public class Shooting : MonoBehaviour
             if (fireRateTimer < 0.0f)
             {
                 canShoot = true;
+            }
+        }
+        
+        if (!canSwordShoot)
+        {
+            swordFireRateTimer -= Time.deltaTime;
+            if (swordFireRateTimer < 0.0f)
+            {
+                canSwordShoot = true;
             }
         }
         
@@ -183,7 +195,7 @@ public class Shooting : MonoBehaviour
             swordOnFire = false;
         }
 
-        if (swordEquiped)
+        if (pistolEquiped)
         {
             gatlingOnFire = false;
             shootgunOnFire = false;
@@ -195,21 +207,21 @@ public class Shooting : MonoBehaviour
     {
         gatlingEquiped = true;
         shootgunEquiped = false;
-        swordEquiped = false;
+        pistolEquiped = false;
     }
 
     void ChangeToShootgun()
     {
         gatlingEquiped = false;
         shootgunEquiped = true;
-        swordEquiped = false;
+        pistolEquiped = false;
     }
     
     void ChangeToSword()
     {
         gatlingEquiped = false;
         shootgunEquiped = false;
-        swordEquiped = true;
+        pistolEquiped = true;
     }
 }
 
